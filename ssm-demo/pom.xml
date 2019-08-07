@@ -14,7 +14,6 @@
     <packaging>war</packaging>
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -36,8 +35,14 @@
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.vct</groupId>
+            <artifactId>ssm-tool</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

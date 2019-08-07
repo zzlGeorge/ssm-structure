@@ -5,16 +5,25 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 引入属性文件，在配置中占位使用 -->
-    <context:property-placeholder location="classpath:prop/db.properties"/>
+    <!--<context:property-placeholder location="classpath:prop/db.properties"/>-->
+
+    <bean class="com.vct.tool.configuration.EncryptPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:prop/db.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
 
     <!-- 阿里巴巴druid数据源 -->
     <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="driverClassName" value="${jdbc_driver}"/>
-        <property name="url" value="${jdbc_url}"/>
-        <property name="username" value="${jdbc_user}"/>
-        <property name="password" value="${jdbc_password}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
 
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="5"/>

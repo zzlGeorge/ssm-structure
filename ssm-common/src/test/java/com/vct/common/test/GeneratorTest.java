@@ -1,6 +1,5 @@
 package com.vct.common.test;
 
-import com.sun.istack.internal.NotNull;
 import com.vct.common.generator.GeneratorMapper;
 import com.vct.common.util.GenUtils;
 import org.apache.commons.io.IOUtils;
@@ -54,7 +53,7 @@ public class GeneratorTest {
     }
 
     static void genZip(GeneratorMapper generatorMapper, List<String> tables,
-                       String packageName, @NotNull String outputPath) throws IOException {
+                       String packageName, String outputPath) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zipOs = new ZipOutputStream(outputStream);
         List<String> tableNames = new ArrayList<String>(tables);
