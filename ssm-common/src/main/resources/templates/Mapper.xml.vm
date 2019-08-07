@@ -5,6 +5,13 @@
 
     <sql id="columns">#foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end</sql>
 
+    <resultMap id="${className}Map" type="${package}.domain.${className}DO">
+        #foreach($column in $columns)#if($column.columnName == $pk.columnName)<id property="$column.attrname" column="$column.columnName"/>
+        #else<result property="$column.attrname" column="$column.columnName"/>
+        #end
+        #end
+    </resultMap>
+
     <select id="get" resultType="${package}.domain.${className}DO">
         select
         <include refid="columns"/>

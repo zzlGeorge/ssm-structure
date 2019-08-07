@@ -1,5 +1,6 @@
 package com.vct.common.test;
 
+import com.sun.istack.internal.NotNull;
 import com.vct.common.generator.GeneratorMapper;
 import com.vct.common.util.GenUtils;
 import org.apache.commons.io.IOUtils;
@@ -25,37 +26,49 @@ public class GeneratorTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         GeneratorMapper generatorMapper = sqlSession.getMapper(GeneratorMapper.class);
 
-//        genZip(generatorMapper);
-        genSourceToProject(generatorMapper);
+
+        List<String> tables = Arrays.asList("d_connector_original"); // 必填，需要你想生成的表信息
+        List<String> templates = Arrays.asList(GenUtils.TemplateType.DOMAIN_JAVA, GenUtils.TemplateType.MAPPER_XML); // 非必填，默认生成全模板
+        String packageName = "com.vct.common"; // 非必填，具体包名，默认为配置中的包名
+        String contextPath = "C:\\Users\\Administrator\\Desktop\\ssm-structure\\ssm-common"; // 非必填，生成文件上下文路径，默认为当前类文件上下文路径
+        // 在项目中生成模板文件
+//        genSourceToProject(generatorMapper, tables, templates, packageName, contextPath);
+
+        // 将生成的文件放入zip文件中输出
+        String outputPath = "C:\\Users\\Administrator\\Desktop\\demo.zip";
+        genZip(generatorMapper, tables, packageName, outputPath);
     }
 
-    static void genSourceToProject(GeneratorMapper generatorMapper){
-        List<String> tableNames = new ArrayList<String>(Arrays.asList("tb_user"));
+    static void genSourceToProject(GeneratorMapper generatorMapper, List<String> tables,
+                                   List<String> templates, String packageName, String contextPath) {
+        List<String> tableNames = new ArrayList<String>(tables);
         for (String tableName : tableNames) {
             //查询表信息
             Map<String, String> table = generatorMapper.get(tableName);
             //查询列信息
             List<Map<String, String>> columns = generatorMapper.listColumns(tableName);
             //生成代码
-            GenUtils.generatorCodeToProject(table, columns,null, "com.vct.common");
+//            GenUtils.generatorCodeToProject(table, columns,null, "com.vct.common");
+            GenUtils.generatorCodeToProject(table, columns, templates, packageName, contextPath);
         }
     }
 
-    static void genZip(GeneratorMapper generatorMapper) throws IOException {
+    static void genZip(GeneratorMapper generatorMapper, List<String> tables,
+                       String packageName, @NotNull String outputPath) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zipOs = new ZipOutputStream(outputStream);
-        List<String> tableNames = new ArrayList<String>(Arrays.asList("tb_user"));
+        List<String> tableNames = new ArrayList<String>(tables);
         for (String tableName : tableNames) {
             //查询表信息
             Map<String, String> table = generatorMapper.get(tableName);
             //查询列信息
             List<Map<String, String>> columns = generatorMapper.listColumns(tableName);
             //生成代码
-            GenUtils.generatorCodeToZip(table, columns, zipOs);
+            GenUtils.generatorCodeToZip(table, columns, zipOs, packageName);
         }
         IOUtils.closeQuietly(zipOs);
 
-        File file = new File("C:/", "Users/lszhangzhangl/Desktop/demo.zip");
+        File file = new File(outputPath);
         if (!file.exists()) {
             file.createNewFile();
         }

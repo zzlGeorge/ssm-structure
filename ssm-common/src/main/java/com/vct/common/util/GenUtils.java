@@ -78,9 +78,16 @@ public class GenUtils {
      * @param columns
      * @param zip
      */
-    public static void generatorCodeToZip(Map<String, String> table, List<Map<String, String>> columns, ZipOutputStream zip) {
+    public static void generatorCodeToZip(Map<String, String> table, List<Map<String, String>> columns,
+                                          ZipOutputStream zip, String packageName) {
         //配置信息
         Configuration config = getConfig();
+        String cfgPackage = config.getString("package");
+        if (StringUtils.isNotBlank(packageName) && !StringUtils.equals(packageName, cfgPackage)) {
+            logger.warn("请注意，配置包名与传递过来的包名不一致，以实际传来的为准！");
+            cfgPackage = packageName;
+            config.setProperty("package", packageName);
+        }
 
         TableDO tableDO = getTableDO(table, config, columns);
 
@@ -95,11 +102,8 @@ public class GenUtils {
             try {
                 //添加到zip
                 zip.putNextEntry(new ZipEntry(
-                        getFileName(
-                                template,
-                                tableDO.getClassname(),
-                                tableDO.getClassName(),
-                                config.getString("package").substring(config.getString("package").lastIndexOf(".") + 1))));
+                        getFileName(template, tableDO.getClassname(), tableDO.getClassName(), cfgPackage))
+                );
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
@@ -121,7 +125,7 @@ public class GenUtils {
                                                  List<Map<String, String>> columns,
                                                  List<String> templates,
                                                  String packageName) {
-        return generatorCodeToProject(table,columns,templates,packageName,null);
+        return generatorCodeToProject(table, columns, templates, packageName, null);
     }
 
     /**
@@ -141,9 +145,9 @@ public class GenUtils {
                                                  String contextPath) {
         //配置信息
         Configuration config = getConfig();
-        if (!StringUtils.equals(packageName, config.getString("packageName"))) {
-            logger.warn("请注意，配置包名与传递过来的包名不一致，请改正！");
-            return false;
+        if (StringUtils.isNotBlank(packageName) && !StringUtils.equals(packageName, config.getString("package"))) {
+            logger.warn("请注意，配置包名与传递过来的包名不一致，以实际传来的为准！");
+            config.setProperty("package", packageName);
         }
 
         TableDO tableDO = getTableDO(table, config, columns);
@@ -162,7 +166,7 @@ public class GenUtils {
             try {
                 String fileName = getFileName(template, tableDO.getClassname(),
                         tableDO.getClassName(), packageName);
-                fileName = contextPath != null ? contextPath : "" + File.separator + fileName;
+                fileName = (contextPath != null ? contextPath + File.separator : "") + fileName;
                 FileUtil.createFile(fileName);
                 if (StringUtils.isNotBlank(fileName)) {
                     File file = new File(fileName);
