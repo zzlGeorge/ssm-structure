@@ -26,7 +26,7 @@ public class GeneratorTest {
         GeneratorMapper generatorMapper = sqlSession.getMapper(GeneratorMapper.class);
 
 
-        List<String> tables = Arrays.asList("d_connector_original"); // 必填，需要你想生成的表信息
+        List<String> tables = Arrays.asList("d_connectorid_status"); // 必填，需要你想生成的表信息
         List<String> templates = Arrays.asList(GenUtils.TemplateType.DOMAIN_JAVA, GenUtils.TemplateType.MAPPER_XML); // 非必填，默认生成全模板
         String packageName = "com.vct.common"; // 非必填，具体包名，默认为配置中的包名
         String contextPath = "C:\\Users\\Administrator\\Desktop\\ssm-structure\\ssm-common"; // 非必填，生成文件上下文路径，默认为当前类文件上下文路径
@@ -34,7 +34,7 @@ public class GeneratorTest {
 //        genSourceToProject(generatorMapper, tables, templates, packageName, contextPath);
 
         // 将生成的文件放入zip文件中输出
-        String outputPath = "C:\\Users\\Administrator\\Desktop\\demo.zip";
+        String outputPath = "C:\\Users\\lszhangzhangl\\Desktop\\demo.zip";
         genZip(generatorMapper, tables, packageName, outputPath);
     }
 
@@ -69,7 +69,7 @@ public class GeneratorTest {
 
         File file = new File(outputPath);
         if (!file.exists()) {
-            file.createNewFile();
+            boolean b = file.createNewFile();
         }
 
         FileOutputStream fos = new FileOutputStream(file);

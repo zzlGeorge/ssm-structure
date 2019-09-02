@@ -4,6 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties resource="db.properties"/>
+    <plugins>
+        <plugin interceptor="com.vct.common.mybatis.splitpage.PageInterceptor">
+            <property name="databaseType" value="mysql"/>
+        </plugin>
+    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -17,6 +22,7 @@
     </environments>
 
     <mappers>
-        <package name="com.vct.common.generator"/>
+        <!--<package name="com.vct.common.generator"/>-->
+        <mapper resource="mybatis.mapper/SplitPageMapper.xml"/>
     </mappers>
 </configuration>
