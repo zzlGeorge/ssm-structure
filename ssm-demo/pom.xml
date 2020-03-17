@@ -11,7 +11,7 @@
 
     <artifactId>ssm-demo</artifactId>
 
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <build>
         <plugins>
@@ -36,8 +36,34 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>rocketmq-example</module>
+        <module>ssm-ser</module>
+    </modules>
 
     <dependencies>
+
+        <!-- webdav -->
+        <dependency>
+            <groupId>slide</groupId>
+            <artifactId>slide-webdavlib</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.rocketmq</groupId>-->
+            <!--<artifactId>rocketmq-client</artifactId>-->
+            <!--&lt;!&ndash;<version>4.4.0</version>&ndash;&gt;-->
+            <!--<version>3.2.6</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <!--<version>4.4.0</version>-->
+            <version>3.2.6</version>
+        </dependency>
+
         <dependency>
             <groupId>com.vct</groupId>
             <artifactId>ssm-tool</artifactId>

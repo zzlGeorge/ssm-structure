@@ -12,19 +12,21 @@
         <module>ssm-common</module>
         <module>ssm-tool</module>
         <module>ssm-rabbitmq</module>
+        <module>example</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
         <spring.version>4.3.7.RELEASE</spring.version>
         <spring.mybatis.version>1.3.2</spring.mybatis.version>
+        <servlet.version>3.1.0</servlet.version>
         <mysql.connector.version>5.1.38</mysql.connector.version>
         <mybatis.version>3.4.1</mybatis.version>
         <druid.version>1.1.10</druid.version>
         <log4j.version>1.2.17</log4j.version>
         <fastjson.version>1.2.58</fastjson.version>
 
-        <java.version>1.8</java.version>
+        <java.version>1.7</java.version>
         <maven.compiler.version>2.3.2</maven.compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -134,12 +136,23 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
 
         <!-- fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
         </dependency>
 
     </dependencies>

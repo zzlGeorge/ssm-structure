@@ -17,9 +17,47 @@ public class DemoServiceImpl implements DemoService {
     @Autowired
     private RedisUtil redisUtil;
 
+    private static final Object firstMonitor = new Object();
+    private static final Object secondMonitor = new Object();
+
     @Override
     public Object operate() {
         redisUtil.set("hello","hello world!");
         return null;
+    }
+
+    @Override
+    public void testDeadLock() {
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    synchronized (firstMonitor) {
+                        synchronized (secondMonitor) {
+                            System.out.println("Thread1");
+                        }
+                    }
+                }
+            }
+
+        }).start();
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    synchronized (secondMonitor) {
+                        synchronized (firstMonitor) {
+                            System.out.println("Thread2");
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    public void testUsingLock() {
+        synchronized (firstMonitor){
+            System.out.println("^_^^_^^_^^_^");
+        }
     }
 }

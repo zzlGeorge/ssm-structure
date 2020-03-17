@@ -428,8 +428,8 @@ public class RedisUtil {
 	 * @param fields
 	 * @return
 	 */
-	public Long hDelete(String key, Object... fields) {
-		return redisTemplate.opsForHash().delete(key, fields);
+	public void hDelete(String key, Object... fields) {
+		redisTemplate.opsForHash().delete(key, fields);
 	}
 
 	/**

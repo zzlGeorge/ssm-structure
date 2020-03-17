@@ -10,4 +10,7 @@ public interface DemoService {
 
     Object operate();
 
+    void testDeadLock();
+
+    void testUsingLock();
 }
