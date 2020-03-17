@@ -13,7 +13,7 @@ public class CommonTest {
 
     public static void main(String[] args) {
         System.out.println(DESUtil.getEncryptString("root"));
-        System.out.println(DESUtil.getEncryptString("123456lzz"));
+        System.out.println(DESUtil.getEncryptString("518178"));
     }
 
 }

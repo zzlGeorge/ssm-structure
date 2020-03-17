@@ -12,7 +12,6 @@
         <module>ssm-common</module>
         <module>ssm-tool</module>
         <module>ssm-rabbitmq</module>
-        <module>example</module>
     </modules>
     <packaging>pom</packaging>
 

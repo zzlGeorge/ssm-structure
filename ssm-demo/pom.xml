@@ -11,7 +11,7 @@
 
     <artifactId>ssm-demo</artifactId>
 
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
     <build>
         <plugins>
@@ -36,10 +36,6 @@
             </plugin>
         </plugins>
     </build>
-    <modules>
-        <module>rocketmq-example</module>
-        <module>ssm-ser</module>
-    </modules>
 
     <dependencies>
 

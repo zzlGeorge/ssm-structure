@@ -15,7 +15,7 @@
 
     <!-- 定义交换器，暂时不把Q绑定到交换机，在管理界面去绑定 -->
     <!--<rabbit:topic-exchange name="topicExchange" auto-declare="true" ></rabbit:topic-exchange>-->
-    <rabbit:direct-exchange name="directExchange" auto-declare="true"></rabbit:direct-exchange>
+    <rabbit:direct-exchange name="directExchange" auto-declare="true"/>
     <!--<rabbit:fanout-exchange name="fanoutExchange" auto-declare="true" ></rabbit:fanout-exchange>-->
 
     <!-- 定义Rabbit模板，指定连接工厂以及定义exchange(exchange要和上面的一致) -->

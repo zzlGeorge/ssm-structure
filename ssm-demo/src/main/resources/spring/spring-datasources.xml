@@ -6,11 +6,11 @@
 
     <!-- 引入属性文件，在配置中占位使用 -->
     <!--<context:property-placeholder location="classpath:prop/db.properties"/>-->
-
     <bean class="com.vct.tool.configuration.EncryptPropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:prop/db.properties</value>
+                <value>classpath:prop/redis.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>
