@@ -5,6 +5,9 @@ import com.vct.ssm.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * description: DemoServiceImpl <br>
  * date: 2019/9/2 11:57 <br>
@@ -21,9 +24,17 @@ public class DemoServiceImpl implements DemoService {
     private static final Object secondMonitor = new Object();
 
     @Override
-    public Object operate() {
-        redisUtil.set("hello","hello world!");
-        return null;
+    public Object operate(Map<String,String> input) {
+        Map<String,Object> result = new HashMap<>();
+        result.put("success",true);
+        result.put("msg","操作成功！");
+        if("1".equals(input.get("flag"))) {
+            redisUtil.set(input.get("key"), input.get("val"));
+        }else if("2".equals(input.get("flag"))) {
+            String val = redisUtil.get(input.get("key"));
+            result.put("data",val);
+        }
+        return result;
     }
 
     @Override

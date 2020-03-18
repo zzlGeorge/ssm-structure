@@ -1,5 +1,7 @@
 package com.vct.ssm.service;
 
+import java.util.Map;
+
 /**
  * description: DemoService <br>
  * date: 2019/9/2 11:56 <br>
@@ -8,7 +10,7 @@ package com.vct.ssm.service;
  */
 public interface DemoService {
 
-    Object operate();
+    Object operate(Map<String,String> input);
 
     void testDeadLock();
 

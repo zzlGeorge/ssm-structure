@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/ssm/demo")
@@ -26,9 +28,14 @@ public class DemoController {
 
     @ResponseBody
     @RequestMapping(value = "/testRedis", method = {RequestMethod.GET})
-    public Object testRedis() {
-        demoService.operate();
-        return "ok";
+    public Object testRedis(@RequestParam Map<String,String> input) {
+        Object operate = null;
+        try {
+            operate = demoService.operate(input);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return operate;
     }
 
     @ResponseBody
