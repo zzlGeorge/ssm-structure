@@ -2,18 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <context:component-scan base-package="com.vct.ssm.dao"/>
+    <!--<mybatis:scan base-package="com.vct.ssm.dao"/>-->
 
     <!-- 会话工厂bean sqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 数据源 -->
         <property name="dataSource" ref="druidDataSource"/>
         <!-- 别名 -->
-        <property name="typeAliasesPackage" value="com.vct.ssm.dao.entities"/>
+        <property name="typeAliasesPackage" value="com.vct.ssm.domain"/>
         <!-- sql映射文件路径 -->
-        <property name="mapperLocations" value="classpath*:com/vct/ssm/dao/*.xml"/>
+        <property name="mapperLocations" value="classpath*:mybatis/*.xml"/>
+        <!-- 分页插件 -->
+        <property name="plugins" value="com.vct.common.mybatis.splitpage.PageInterceptor"/>
     </bean>
 
     <!-- 自动扫描对象关系映射 -->

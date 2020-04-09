@@ -4,6 +4,9 @@
          version="3.0" metadata-complete="true">
 
     <display-name>simple-web</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 
     <!-- dispatcherServlet -->
     <servlet>
