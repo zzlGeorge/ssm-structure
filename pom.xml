@@ -5,13 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.vct</groupId>
-    <artifactId>ssm-structure</artifactId>
+    <artifactId>ssm-root</artifactId>
     <version>1.0.0</version>
     <modules>
         <module>ssm-demo</module>
         <module>ssm-common</module>
         <module>ssm-tool</module>
         <module>ssm-rabbitmq</module>
+        <module>ssm-user-root</module>
+        <module>ssm-goods-root</module>
     </modules>
     <packaging>pom</packaging>
 

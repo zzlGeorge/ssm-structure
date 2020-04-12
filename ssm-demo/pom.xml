@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ssm-structure</artifactId>
+        <artifactId>ssm-root</artifactId>
         <groupId>com.vct</groupId>
         <version>1.0.0</version>
     </parent>
@@ -34,6 +34,37 @@
                     <path>/</path>
                 </configuration>
             </plugin>
+
+            <!-- 将其他模块资源依赖打包到当前容器模块，便于统一维护 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+
+                                <!-- 引入user-web模块 -->
+                                <artifactItem>
+                                    <groupId>com.vct</groupId>
+                                    <artifactId>user-web</artifactId>
+                                    <version>1.0.0</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/classes/user</outputDirectory>
+                                    <includes>**/prop/*.properties,**/spring/*.xml</includes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -69,6 +100,12 @@
         <dependency>
             <groupId>com.vct</groupId>
             <artifactId>ssm-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vct</groupId>
+            <artifactId>user-web</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
