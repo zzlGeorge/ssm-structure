@@ -1,6 +1,6 @@
-package com.vct.ssm.dao;
+package com.vct.user.dao;
 
-import com.vct.ssm.domain.UserDO;
+import com.vct.user.domain.UserDO;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 
  * @author mading
  * @email zhang0909990@qq.com
- * @date 2020-03-22 21:11:41
+ * @date 2020-04-13 21:30:43
  */
 @Mapper
 public interface UserDao {

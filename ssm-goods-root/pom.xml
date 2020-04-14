@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ssm-goods-root</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>goods-web</module>
+        <module>goods-api</module>
+        <module>goods-service</module>
+    </modules>
 
 
 </project>

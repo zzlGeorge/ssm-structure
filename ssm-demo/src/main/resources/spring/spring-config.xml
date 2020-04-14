@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 引入属性文件，在配置中占位使用 -->
+    <!--<context:property-placeholder location="classpath:prop/db.properties"/>-->
+    <bean class="com.vct.tool.configuration.EncryptPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:prop/db.properties</value>
+                <value>classpath:prop/redis.properties</value>
+                <value>classpath:prop/dubbo.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+</beans>

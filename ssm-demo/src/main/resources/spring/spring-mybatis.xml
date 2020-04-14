@@ -16,7 +16,11 @@
         <!-- sql映射文件路径 -->
         <property name="mapperLocations" value="classpath*:mybatis/*.xml"/>
         <!-- 分页插件 -->
-        <property name="plugins" value="com.vct.common.mybatis.splitpage.PageInterceptor"/>
+        <property name="plugins">
+            <list>
+                <bean class="com.vct.common.mybatis.splitpage.PageInterceptor"/>
+            </list>
+        </property>
     </bean>
 
     <!-- 自动扫描对象关系映射 -->

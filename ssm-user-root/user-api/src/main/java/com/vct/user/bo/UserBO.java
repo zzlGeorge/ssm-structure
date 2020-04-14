@@ -1,16 +1,15 @@
-package com.vct.ssm.domain;
+package com.vct.user.bo;
 
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
- * @author mading
- * @email zhang0909990@qq.com
- * @date 2020-03-22 21:11:41
+ * description: UserBO <br>
+ * date: 2020/4/13 21:19 <br>
+ * author: liuzz <br>
+ * version: 1.0 <br>
  */
-public class UserDO implements Serializable {
-
+public class UserBO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //
@@ -18,7 +17,9 @@ public class UserDO implements Serializable {
     //
     private String userName;
     //
-    private String email;
+    private Integer userAge;
+    //
+    private String userEmail;
     //
     private Date createTime;
     //
@@ -40,12 +41,20 @@ public class UserDO implements Serializable {
         return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserAge(Integer userAge) {
+        this.userAge = userAge;
     }
 
-    public String getEmail() {
-        return email;
+    public Integer getUserAge() {
+        return userAge;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
     }
 
     public void setCreateTime(Date createTime) {

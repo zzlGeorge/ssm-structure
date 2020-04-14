@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.vct.ssm.dao.UserDao">
+<mapper namespace="com.vct.user.dao.UserDao">
 
-    <sql id="columns">`id`,`user_name`,`email`,`create_time`,`modify_time`</sql>
+    <sql id="columns">`id`,`user_name`,`user_age`,`user_email`,`create_time`,`modify_time`</sql>
 
-    <resultMap id="UserMap" type="com.vct.ssm.domain.UserDO">
+    <resultMap id="UserMap" type="com.vct.user.domain.UserDO">
         <id property="id" column="id"/>
         <result property="userName" column="user_name"/>
-        <result property="email" column="email"/>
+        <result property="userAge" column="user_age"/>
+        <result property="userEmail" column="user_email"/>
         <result property="createTime" column="create_time"/>
         <result property="modifyTime" column="modify_time"/>
     </resultMap>
 
-    <select id="get" resultType="com.vct.ssm.domain.UserDO">
+    <select id="get" resultType="com.vct.user.domain.UserDO">
         select
         <include refid="columns"/>
-        from van_user where id = #{value}
+        from u_user where id = #{value}
     </select>
 
-    <select id="list" resultType="com.vct.ssm.domain.UserDO">
+    <select id="list" resultType="com.vct.user.domain.UserDO">
         select
         <include refid="columns"/>
-        from van_user
+        from u_user
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="userName != null and userName != ''">and user_name = #{userName}</if>
-            <if test="email != null and email != ''">and email = #{email}</if>
+            <if test="userAge != null and userAge != ''">and user_age = #{userAge}</if>
+            <if test="userEmail != null and userEmail != ''">and user_email = #{userEmail}</if>
             <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
             <if test="modifyTime != null and modifyTime != ''">and modify_time = #{modifyTime}</if>
         </where>
@@ -43,37 +45,41 @@
         </if>
     </select>
 
-    <select id="count" resultType="java.lang.Integer">
-        select count(*) from van_user
+    <select id="count" resultType="int">
+        select count(*) from u_user
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="userName != null and userName != ''">and user_name = #{userName}</if>
-            <if test="email != null and email != ''">and email = #{email}</if>
+            <if test="userAge != null and userAge != ''">and user_age = #{userAge}</if>
+            <if test="userEmail != null and userEmail != ''">and user_email = #{userEmail}</if>
             <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
             <if test="modifyTime != null and modifyTime != ''">and modify_time = #{modifyTime}</if>
         </where>
     </select>
 
-    <insert id="save" parameterType="com.vct.ssm.domain.UserDO" useGeneratedKeys="true" keyProperty="id">
-		insert into van_user
+    <insert id="save" parameterType="com.vct.user.domain.UserDO" useGeneratedKeys="true" keyProperty="id">
+		insert into u_user
 		(
                 		 `user_name`,
-		             		 `email`,
+		             		 `user_age`,
+		             		 `user_email`,
 		             		 `create_time`,
 		             		 `modify_time`        		)
 		values
 		(
                 		#{userName},
-		            		#{email},
+		            		#{userAge},
+		            		#{userEmail},
 		            		#{createTime},
 		            		#{modifyTime}        		)
 	</insert>
 
-    <update id="update" parameterType="com.vct.ssm.domain.UserDO">
-        update van_user
+    <update id="update" parameterType="com.vct.user.domain.UserDO">
+        update u_user
         <set>
             <if test="userName != null">`user_name` = #{userName},</if>
-            <if test="email != null">`email` = #{email},</if>
+            <if test="userAge != null">`user_age` = #{userAge},</if>
+            <if test="userEmail != null">`user_email` = #{userEmail},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
             <if test="modifyTime != null">`modify_time` = #{modifyTime}</if>
         </set>
@@ -81,11 +87,11 @@
     </update>
 
     <delete id="remove">
-		delete from van_user where id = #{value}
+		delete from u_user where id = #{value}
 	</delete>
 
     <delete id="batchRemove">
-        delete from van_user where id in
+        delete from u_user where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

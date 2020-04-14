@@ -1,7 +1,5 @@
 package com.vct.ssm.web.controller;
 
-import com.vct.ssm.dao.UserDao;
-import com.vct.ssm.domain.UserDO;
 import com.vct.ssm.service.DemoService;
 import org.apache.commons.httpclient.HttpURL;
 import org.apache.webdav.lib.WebdavResource;
@@ -21,9 +19,6 @@ public class DemoController {
 
     @Autowired
     private DemoService demoService;
-
-    @Autowired
-    private UserDao userDao;
 
     @ResponseBody
     @RequestMapping(value = "/hello", method = {RequestMethod.GET})
@@ -65,13 +60,6 @@ public class DemoController {
     public Object testUsingLock(){
         demoService.testUsingLock();
         return "testUsingLock ok";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/testMybatis")
-    public Object testMybatis(){
-        UserDO userDO = userDao.get(1L);
-        return userDO;
     }
 
 }
