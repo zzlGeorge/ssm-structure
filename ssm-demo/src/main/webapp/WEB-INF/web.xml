@@ -43,6 +43,23 @@
     </listener>
     <!-- Spring配置文件结束 -->
 
+    <!--log4j相关-->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:prop/log4j.properties</param-value>
+    </context-param>
+    <context-param>
+        <param-name>log4jRefreshInterval</param-name>
+        <!-- 6秒 -->
+        <param-value>6000</param-value>
+    </context-param>
+    <listener>
+        <listener-class>
+            org.springframework.web.util.Log4jConfigListener
+        </listener-class>
+    </listener>
+    <!--log4j相关-->
+
     <!-- 可以使用RequestContextHolder.currentRequestAttributes() 获取到请求的attr -->
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>

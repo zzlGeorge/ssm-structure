@@ -57,7 +57,7 @@
                                     <type>jar</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}/classes/user</outputDirectory>
-                                    <includes>**/prop/*.properties,**/spring/*.xml,**/mybatis/*.xml</includes>
+                                    <includes>**/prop/*.properties,**/spring/*.xml,**/mybatis/*.xml,**/*.xml</includes>
                                 </artifactItem>
 
                                 <!-- 引入goods-web模块配置 -->

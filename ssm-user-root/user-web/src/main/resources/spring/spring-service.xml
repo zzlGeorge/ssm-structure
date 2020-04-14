@@ -20,6 +20,7 @@
                 <value>classpath*:mybatis/*.xml</value>
             </list>
         </property>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 分页插件 -->
         <!--<property name="plugins">-->
             <!--<list>-->

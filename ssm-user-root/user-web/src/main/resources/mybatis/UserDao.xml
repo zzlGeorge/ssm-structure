@@ -14,13 +14,13 @@
         <result property="modifyTime" column="modify_time"/>
     </resultMap>
 
-    <select id="get" resultType="com.vct.user.domain.UserDO">
+    <select id="get" resultMap="UserMap">
         select
         <include refid="columns"/>
         from u_user where id = #{value}
     </select>
 
-    <select id="list" resultType="com.vct.user.domain.UserDO">
+    <select id="list" resultMap="UserMap">
         select
         <include refid="columns"/>
         from u_user
