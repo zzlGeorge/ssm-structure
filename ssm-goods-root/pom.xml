@@ -17,5 +17,12 @@
         <module>goods-service</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.vct</groupId>
+            <artifactId>ssm-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

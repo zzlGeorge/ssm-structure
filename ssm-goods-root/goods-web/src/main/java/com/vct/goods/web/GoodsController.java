@@ -1,9 +1,14 @@
 package com.vct.goods.web;
 
+import com.vct.common.util.StringUtils;
+import com.vct.goods.api.service.IGoodsService;
+import com.vct.goods.bo.GoodsBO;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * description: GoodsController <br>
@@ -11,14 +16,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * author: liuzz <br>
  * version: 1.0 <br>
  */
-@Controller
+@RestController
 @RequestMapping(value = "/goods")
 public class GoodsController {
 
-    @ResponseBody
+    private static final Logger logger = Logger.getLogger(GoodsController.class);
+
+    @Autowired
+    private IGoodsService goodsService;
+
     @RequestMapping(value = "/hello", method = {RequestMethod.GET})
     public String helloWorld() {
         return "Hello world! This is goods module!";
+    }
+
+    @RequestMapping(value = "/getGoods", method = {RequestMethod.GET})
+    public Object getGoods(@RequestParam Map map) {
+        String goodsId = StringUtils.null2String(map.get("goodsId"));
+        GoodsBO goods = goodsService.getGoodsById(StringUtils.isNotBlank(goodsId) ? Long.valueOf(goodsId) : 0L);
+        return goods;
     }
 
 }

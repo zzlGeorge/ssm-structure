@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vct.goods.dao.GoodsDao">
+
+    <sql id="columns">`id`,`goods_name`,`goods_weight`,`goods_price`,`create_time`,`modify_time`</sql>
+
+    <resultMap id="GoodsMap" type="com.vct.goods.domain.GoodsDO">
+        <id property="id" column="id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="goodsWeight" column="goods_weight"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+    </resultMap>
+
+    <select id="get" resultMap="GoodsMap">
+        select
+        <include refid="columns"/>
+        from g_goods where id = #{value}
+    </select>
+
+    <select id="list" resultMap="GoodsMap">
+        select
+        <include refid="columns"/>
+        from g_goods
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="goodsName != null and goodsName != ''">and goods_name = #{goodsName}</if>
+            <if test="goodsWeight != null and goodsWeight != ''">and goods_weight = #{goodsWeight}</if>
+            <if test="goodsPrice != null and goodsPrice != ''">and goods_price = #{goodsPrice}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="modifyTime != null and modifyTime != ''">and modify_time = #{modifyTime}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from g_goods
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="goodsName != null and goodsName != ''">and goods_name = #{goodsName}</if>
+            <if test="goodsWeight != null and goodsWeight != ''">and goods_weight = #{goodsWeight}</if>
+            <if test="goodsPrice != null and goodsPrice != ''">and goods_price = #{goodsPrice}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="modifyTime != null and modifyTime != ''">and modify_time = #{modifyTime}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.vct.goods.domain.GoodsDO" useGeneratedKeys="true" keyProperty="id">
+		insert into g_goods
+		(
+                		 `goods_name`,
+		             		 `goods_weight`,
+		             		 `goods_price`,
+		             		 `create_time`,
+		             		 `modify_time`        		)
+		values
+		(
+                		#{goodsName},
+		            		#{goodsWeight},
+		            		#{goodsPrice},
+		            		#{createTime},
+		            		#{modifyTime}        		)
+	</insert>
+
+    <update id="update" parameterType="com.vct.goods.domain.GoodsDO">
+        update g_goods
+        <set>
+            <if test="goodsName != null">`goods_name` = #{goodsName},</if>
+            <if test="goodsWeight != null">`goods_weight` = #{goodsWeight},</if>
+            <if test="goodsPrice != null">`goods_price` = #{goodsPrice},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="modifyTime != null">`modify_time` = #{modifyTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from g_goods where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from g_goods where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

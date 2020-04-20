@@ -50,26 +50,26 @@
                             <artifactItems>
 
                                 <!-- 引入user-web模块配置 -->
-                                <artifactItem>
-                                    <groupId>com.vct</groupId>
-                                    <artifactId>user-web</artifactId>
-                                    <version>1.0.0</version>
-                                    <type>jar</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/classes/user</outputDirectory>
-                                    <includes>**/prop/*.properties,**/spring/*.xml,**/mybatis/*.xml,**/*.xml</includes>
-                                </artifactItem>
-
-                                <!-- 引入goods-web模块配置 -->
                                 <!--<artifactItem>-->
                                     <!--<groupId>com.vct</groupId>-->
-                                    <!--<artifactId>goods-web</artifactId>-->
+                                    <!--<artifactId>user-web</artifactId>-->
                                     <!--<version>1.0.0</version>-->
                                     <!--<type>jar</type>-->
                                     <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>${project.build.directory}/classes/goods</outputDirectory>-->
-                                    <!--<includes>**/prop/*.properties,**/spring/*.xml</includes>-->
+                                    <!--<outputDirectory>${project.build.directory}/classes/user</outputDirectory>-->
+                                    <!--<includes>**/prop/*.properties,**/spring/*.xml,**/mybatis/*.xml,**/*.xml</includes>-->
                                 <!--</artifactItem>-->
+
+                                <!-- 引入goods-web模块配置 -->
+                                <artifactItem>
+                                    <groupId>com.vct</groupId>
+                                    <artifactId>goods-web</artifactId>
+                                    <version>1.0.0</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/classes/goods</outputDirectory>
+                                    <includes>**/prop/*.properties,**/spring/*.xml,**/mybatis/*.xml,**/*.xml</includes>
+                                </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>

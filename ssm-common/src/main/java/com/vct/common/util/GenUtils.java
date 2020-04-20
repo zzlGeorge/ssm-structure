@@ -328,9 +328,9 @@ public class GenUtils {
         }
 
         if (template.contains("Mapper.xml.vm")) {
-            return packagePath + "dao" + File.separator + className + "Dao.xml";
-//            return "src" + File.separator + "main" + File.separator + "resources" + File.separator
-//                    + "mybatis" + File.separator + className + "Mapper.xml";
+//            return packagePath + "dao" + File.separator + className + "Dao.xml";
+            return "src" + File.separator + "main" + File.separator + "resources" + File.separator
+                    + "mybatis" + File.separator + className + "Dao.xml";
         }
 
         //		if(template.contains("Mapper.java.vm")){

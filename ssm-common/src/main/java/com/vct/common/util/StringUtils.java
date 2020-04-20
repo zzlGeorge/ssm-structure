@@ -1,7 +1,7 @@
 package com.vct.common.util;
 
 /**
- * @author bootdo
+ * @author vct
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
@@ -28,6 +28,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         } else {
             return source;
         }
+    }
+
+    public static String null2String(Object obj) {
+        return obj != null ? obj.toString() : "";
     }
 
 }

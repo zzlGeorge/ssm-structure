@@ -12,4 +12,17 @@
     <artifactId>goods-web</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.vct</groupId>
+            <artifactId>goods-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vct</groupId>
+            <artifactId>goods-service</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
 </project>

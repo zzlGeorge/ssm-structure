@@ -26,10 +26,10 @@ public class GeneratorTest {
         GeneratorMapper generatorMapper = sqlSession.getMapper(GeneratorMapper.class);
 
 
-        List<String> tables = Arrays.asList("u_user"); // 必填，需要你想生成的表信息
+        List<String> tables = Arrays.asList("g_goods"); // 必填，需要你想生成的表信息
         List<String> templates = Arrays.asList(GenUtils.TemplateType.DOMAIN_JAVA, GenUtils.TemplateType.DAO_JAVA, GenUtils.TemplateType.MAPPER_XML); // 非必填，默认生成全模板
-        String packageName = "com.vct.user"; // 非必填，具体包名，默认为配置中的包名
-        String contextPath = "E:\\program\\ssm-structure\\ssm-user-root\\user-service"; // 非必填，生成文件上下文路径，默认为当前类文件上下文路径
+        String packageName = "com.vct.goods"; // 非必填，具体包名，默认为配置中的包名
+        String contextPath = "E:\\program\\ssm-structure\\ssm-goods-root\\goods-service"; // 非必填，生成文件上下文路径，默认为当前类文件上下文路径
         // 在项目中生成模板文件
         genSourceToProject(generatorMapper, tables, templates, packageName, contextPath);
 
