@@ -186,6 +186,7 @@
             <artifactId>zkclient</artifactId>
             <version>0.1</version>
         </dependency>
+        <!-- dubbo相关 end -->
 
     </dependencies>
 

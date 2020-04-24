@@ -1,12 +1,12 @@
-package com.vct.user.service.rpc;
+package com.vct.user.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.vct.user.bo.UserBO;
 import com.vct.user.dao.UserDao;
 import com.vct.user.domain.UserDO;
 import com.vct.user.service.api.IUserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * description: UserServiceImpl <br>

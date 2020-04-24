@@ -14,7 +14,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:**/spring/web-spring-mvc.xml</param-value>
+            <param-value>classpath:**/*dubbo-config.xml,classpath:**/spring/spring-*.xml,classpath:**/spring/web-spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>
@@ -32,16 +32,6 @@
         <servlet-name>DruidStatView</servlet-name>
         <url-pattern>/druid/*</url-pattern>
     </servlet-mapping>
-
-    <!-- Spring配置文件开始 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:**/spring/spring-*.xml</param-value>
-    </context-param>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <!-- Spring配置文件结束 -->
 
     <!--log4j相关-->
     <context-param>

@@ -9,12 +9,13 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="goods_provider"/>
+    <dubbo:application name="goods_app"/>
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="zookeeper://liuzz.vm.com:2181"/>
 
-    <dubbo:protocol name="dubbo" port="20881" />
+    <!-- 要暴露的服务调用ip和端口号（防止调用ip乱入情况） -->
+    <dubbo:protocol name="dubbo" host="192.168.142.147" port="20881" />
 
     <dubbo:provider timeout="15000" retries="0" delay="-1" />
 

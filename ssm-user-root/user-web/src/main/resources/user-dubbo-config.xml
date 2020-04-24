@@ -9,23 +9,26 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="user_provider"/>
+    <dubbo:application name="user_app"/>
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="zookeeper://liuzz.vm.com:2181"/>
 
     <!-- 防止类似：com.alibaba.dubbo.remoting.RemotingException: Failed to bind NettyServer on /192.168.142.1:20880, cause: Failed to bind to: /0.0.0.0:20880 -->
-    <dubbo:protocol name="dubbo" port="30102" />
+    <dubbo:protocol name="dubbo" port="20882"/>
 
     <!-- 声明需要暴露的服务接口[使用扫描包的形式暴露] -->
     <!--<dubbo:service interface="com.vct.service.HelloService" ref="helloService"/>-->
-    <dubbo:annotation package="com.vct.user.service.rpc"/>
+    <!--<dubbo:annotation package="com.vct.user.service.rpc"/>-->
 
     <!-- 将服务接口实现类也加入到SpringIoC容器内，以供其他类依赖使用-->
     <!--<bean id="helloService" class="com.vct.rpc.HelloServiceImpl"/>-->
-    <context:component-scan base-package="com.vct.user.service.rpc"/>
+    <!--<context:component-scan base-package="com.vct.user.service.rpc"/>-->
 
     <!-- 使用扫描包形式，找到相关调用类中，用alibaba提供的@Reference注解找到声明对象并远程代理注入实例 -->
+
+    <!--<dubbo:consumer check="false"/>-->
+
     <dubbo:annotation package="com.vct.user.web"/>
 
 </beans>
