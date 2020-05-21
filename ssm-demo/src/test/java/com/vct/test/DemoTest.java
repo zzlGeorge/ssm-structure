@@ -1,10 +1,12 @@
 package com.vct.test;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.vct.goods.api.service.IGoodsService;
-import com.vct.goods.bo.GoodsBO;
-import com.vct.user.bo.UserBO;
-import com.vct.user.service.api.IUserService;
+import com.vct.common.rocketmq.MyProducer;
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.client.producer.SendStatus;
+import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,22 +18,27 @@ import org.springframework.test.context.ContextConfiguration;
  * version: 1.0 <br>
  */
 @ContextConfiguration(locations={
-        "classpath:user-dubbo-config.xml",
+//        "classpath:user-dubbo-config.xml",
+        "classpath:spring/spring-rocketmq-producer.xml",
 }) //加载配置文件
 public class DemoTest extends BaseJunit4Test{
 
     @Autowired
-    private IUserService userService;
-
-    @Reference
-    private IGoodsService goodsService;
+    private MyProducer myProducer;
 
     @Test
-    public void testUser(){
-        UserBO userById = userService.getUserById(1L);
-        System.out.println();
-        GoodsBO goods = goodsService.getGoodsById(1L);
-        System.out.println();
+    public void testRocketMq(){
+        Message msg = new Message("Liuzz", "liuzzTag", "hello world".getBytes());
+        SendResult sendResult = null;
+        try {
+            sendResult = myProducer.getDefaultMQProducer().send(msg);
+        } catch (InterruptedException | RemotingException | MQBrokerException | MQClientException e) {
+            e.printStackTrace();
+        }
+        // 当消息发送失败时如何处理
+        if (sendResult == null || sendResult.getSendStatus() != SendStatus.SEND_OK) {
+            // TODO
+        }
     }
 
 }
