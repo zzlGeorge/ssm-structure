@@ -108,12 +108,12 @@
             <!--<version>3.2.6</version>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.alibaba.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-            <!--<version>4.4.0</version>-->
-            <version>3.2.6</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.rocketmq</groupId>-->
+            <!--<artifactId>rocketmq-client</artifactId>-->
+            <!--&lt;!&ndash;<version>4.4.0</version>&ndash;&gt;-->
+            <!--<version>3.2.6</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.vct</groupId>

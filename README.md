@@ -5,12 +5,13 @@ SSM基础框架及相关组件扩展（学习用）
 #### 基本框架
 - Spring、Spring MVC、MyBatis
 - Alibaba Druid
+- Dubbo
 
 #### 中间件
 - Redis
 - MySQL
 - Zookeeper
-- RabbitMQ
+- RocketMQ
 
 ## 整合常用功能
 整合Thymeleaf模板引擎制作的基于MyBatis的逆向代码生成（从前端到后端代码）

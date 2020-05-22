@@ -11,6 +11,16 @@ import java.util.Map;
  */
 public class CommonTest {
     public static void main(String[] args) {
-
+        try {
+            try {
+                System.out.println(111);
+                int i = 1/0;
+                System.out.println(222);
+            } finally {
+                System.out.println("hello 11111");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
