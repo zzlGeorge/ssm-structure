@@ -15,7 +15,7 @@
     <dubbo:registry address="zookeeper://liuzz.vm.com:2181"/>
 
     <!-- 要暴露的服务调用ip和端口号（防止调用ip乱入情况） -->
-    <dubbo:protocol name="dubbo" host="192.168.142.147" port="20881" />
+    <dubbo:protocol name="dubbo" host="192.168.0.109" port="20881" />
 
     <dubbo:provider timeout="15000" retries="0" delay="-1" />
 

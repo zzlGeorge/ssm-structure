@@ -18,13 +18,17 @@
         <property name="poolConfig" ref="poolConfig" />
     </bean>
 
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
         <property name="connectionFactory" ref="jedisConnectionFactory" />
     </bean>
 
     <!-- RedisUtil注入RedisTemplate -->
     <bean id="redisUtil" class="com.vct.common.redis.RedisUtil">
-        <property name="redisTemplate" ref="redisTemplate" />
+        <property name="redisTemplate" ref="stringRedisTemplate" />
     </bean>
+
+    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">-->
+        <!--<property name="connectionFactory" ref="jedisConnectionFactory" />-->
+    <!--</bean>-->
 
 </beans>

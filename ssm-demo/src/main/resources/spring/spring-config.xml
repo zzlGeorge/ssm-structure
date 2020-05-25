@@ -10,6 +10,7 @@
                 <value>classpath:prop/db.properties</value>
                 <value>classpath:prop/redis.properties</value>
                 <value>classpath:prop/dubbo.properties</value>
+                <value>classpath:prop/rocketmq.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>

@@ -1,10 +1,13 @@
 package com.vct.user.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.vct.user.bo.UserBO;
 import com.vct.user.dao.UserDao;
 import com.vct.user.domain.UserDO;
 import com.vct.user.service.api.IUserService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements IUserService {
 
-    private static Logger logger = Logger.getLogger(UserServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserDao userDao;
@@ -26,7 +29,7 @@ public class UserServiceImpl implements IUserService {
     public UserBO getUserById(Long userId) {
         UserDO userDO = userDao.get(userId);
         UserBO userBO = null;
-        logger.error("getUserById={}");
+        logger.info("getUserById={},结果={}", userId, JSON.toJSONString(userDO));
         if(userDO!=null){
             userBO = new UserBO();
             userBO.setCreateTime(userDO.getCreateTime());

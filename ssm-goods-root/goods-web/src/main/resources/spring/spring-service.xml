@@ -5,7 +5,7 @@
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <context:component-scan base-package="com.vct.goods.service.rpc"/>
+    <context:component-scan base-package="com.vct.goods.service.rpc,com.vct.seckill,com.vct.common.rocketmq,com.vct.common.redis"/>
     <!--<mybatis:scan base-package="com.vct.ssm.dao"/>-->
 
     <!-- 会话工厂bean sqlSessionFactoryBean -->
@@ -34,6 +34,6 @@
         <!--指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 -->
         <property name="sqlSessionFactoryBeanName" value="goodsSqlSessionFactory"/>
         <!-- 指定要自动扫描接口的基础包，实现接口 -->
-        <property name="basePackage" value="com.vct.goods.dao"/>
+        <property name="basePackage" value="com.vct.goods.dao,com.vct.seckill.dao"/>
     </bean>
 </beans>
