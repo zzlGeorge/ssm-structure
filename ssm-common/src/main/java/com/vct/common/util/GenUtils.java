@@ -30,28 +30,28 @@ public class GenUtils {
 
     private static Logger logger = Logger.getLogger(GenUtils.class);
 
-    private static final String propertiesPath = "generator.properties";
+    private static final String propertiesPath = "generator.properties" ;
 
     public static final class TemplateType {
-        public static String DOMAIN_JAVA = "templates/domain.java.vm";
-        public static String DAO_JAVA = "templates/Dao.java.vm";
-        public static String MAPPER_XML = "templates/Mapper.xml.vm";
+        public static String DOMAIN_JAVA = "templates/domain.java.vm" ;
+        public static String DAO_JAVA = "templates/Dao.java.vm" ;
+        public static String MAPPER_XML = "templates/Mapper.xml.vm" ;
 
-        public static String CONTROLLER_JAVA = "templates/Controller.java.vm";
-        public static String SERVICE_JAVA = "templates/Service.java.vm";
-        public static String SERVICE_IMPL_JAVA = "templates/ServiceImpl.java.vm";
+        public static String CONTROLLER_JAVA = "templates/Controller.java.vm" ;
+        public static String SERVICE_JAVA = "templates/Service.java.vm" ;
+        public static String SERVICE_IMPL_JAVA = "templates/ServiceImpl.java.vm" ;
 
-        public static String LIST_HTML = "templates/list.html.vm";
-        public static String ADD_HTML = "templates/add.html.vm";
-        public static String EDIT_HTML = "templates/edit.html.vm";
-        public static String LIST_JS = "templates/list.js.vm";
-        public static String ADD_JS = "templates/add.js.vm";
-        public static String EDIT_JS = "templates/edit.js.vm";
+        public static String LIST_HTML = "templates/list.html.vm" ;
+        public static String ADD_HTML = "templates/add.html.vm" ;
+        public static String EDIT_HTML = "templates/edit.html.vm" ;
+        public static String LIST_JS = "templates/list.js.vm" ;
+        public static String ADD_JS = "templates/add.js.vm" ;
+        public static String EDIT_JS = "templates/edit.js.vm" ;
 
         private static List<String> allTemplates;
 
         static {
-            allTemplates = new ArrayList<String>();
+            allTemplates = new ArrayList<>();
             allTemplates.add(DOMAIN_JAVA);
             allTemplates.add(DAO_JAVA);
             allTemplates.add(MAPPER_XML);
@@ -78,7 +78,7 @@ public class GenUtils {
      * @param columns
      * @param zip
      */
-    public static void generatorCodeToZip(Map<String, String> table, List<Map<String, String>> columns,
+    public static void generatorCodeToZip(List<String> templates, Map<String, String> table, List<Map<String, String>> columns,
                                           ZipOutputStream zip, String packageName) {
         //配置信息
         Configuration config = getConfig();
@@ -93,7 +93,8 @@ public class GenUtils {
 
         VelocityContext context = getContext(tableDO, config);
 
-        for (String template : getTemplates()) {
+        List<String> tpls = CollectionUtils.isEmpty(templates) ? getTemplates() : templates;
+        for (String template : tpls) {
             //渲染模板
             StringWriter sw = new StringWriter();
             Template tpl = Velocity.getTemplate(template, "UTF-8");
@@ -319,75 +320,82 @@ public class GenUtils {
             packagePath += packageName.replace(".", File.separator) + File.separator;
         }
 
+        if (template.contains("swaggerModel.java.vm")) {
+            return packagePath + "model" + File.separator + className + "Model.java" ;
+        }
+
         if (template.contains("domain.java.vm")) {
             return packagePath + "domain" + File.separator + className + "DO.java";
         }
 
+        if (template.contains("entity.java.vm")) {
+            return packagePath + "dao" + File.separator + "entity" + File.separator + className + ".java" ;
+        }
+
         if (template.contains("Dao.java.vm")) {
-            return packagePath + "dao" + File.separator + className + "Dao.java";
+            return packagePath + "dao" + File.separator + className + "Dao.java" ;
+        }
+
+        if (template.contains("Mapper.java.vm")) {
+            return packagePath + "dao" + File.separator + "mapper" + File.separator + className + "Mapper.java" ;
         }
 
         if (template.contains("Mapper.xml.vm")) {
 //            return packagePath + "dao" + File.separator + className + "Dao.xml";
             return "src" + File.separator + "main" + File.separator + "resources" + File.separator
-                    + "mybatis" + File.separator + className + "Dao.xml";
+                    + "mybatis" + File.separator + className + "Dao.xml" ;
         }
 
-        //		if(template.contains("Mapper.java.vm")){
-        //			return packagePath + "dao" + File.separator + className + "Mapper.java";
-        //		}
-
         if (template.contains("Service.java.vm")) {
-            return packagePath + "service" + File.separator + className + "Service.java";
+            return packagePath + "service" + File.separator + "I" + className + "Service.java" ;
         }
 
         if (template.contains("ServiceImpl.java.vm")) {
             return packagePath + "service" + File.separator + "impl" + File.separator + className
-                    + "ServiceImpl.java";
+                    + "ServiceImpl.java" ;
         }
 
         if (template.contains("Controller.java.vm")) {
-            return packagePath + "controller" + File.separator + className + "Controller.java";
+            return packagePath + "controller" + File.separator + className + "Controller.java" ;
+        }
+
+        if (template.contains("Api.java.vm")) {
+            return packagePath + "controller" + File.separator + "api" + File.separator + className + "Api.java" ;
         }
 
         if (template.contains("list.html.vm")) {
             return "src" + File.separator + "main" + File.separator + "resources" + File.separator
                     + "templates" + File.separator + moduleName + File.separator + classname
-                    + File.separator + classname + ".html";
+                    + File.separator + classname + ".html" ;
             //				+ "modules" + File.separator + "generator" + File.separator + className.toLowerCase() + ".html";
         }
         if (template.contains("add.html.vm")) {
             return "src" + File.separator + "main" + File.separator + "resources" + File.separator
                     + "templates" + File.separator + moduleName + File.separator + classname
-                    + File.separator + "add.html";
+                    + File.separator + "add.html" ;
         }
         if (template.contains("edit.html.vm")) {
             return "src" + File.separator + "main" + File.separator + "resources" + File.separator
                     + "templates" + File.separator + moduleName + File.separator + classname
-                    + File.separator + "edit.html";
+                    + File.separator + "edit.html" ;
         }
 
         if (template.contains("list.js.vm")) {
             return "src" + File.separator + "main" + File.separator + "resources" + File.separator
                     + "static" + File.separator + "js" + File.separator + "appjs" + File.separator
-                    + moduleName + File.separator + classname + File.separator + classname + ".js";
+                    + moduleName + File.separator + classname + File.separator + classname + ".js" ;
             //		+ "modules" + File.separator + "generator" + File.separator + className.toLowerCase() + ".js";
         }
         if (template.contains("add.js.vm")) {
             return "src" + File.separator + "main" + File.separator + "resources" + File.separator
                     + "static" + File.separator + "js" + File.separator + "appjs" + File.separator
-                    + moduleName + File.separator + classname + File.separator + "add.js";
+                    + moduleName + File.separator + classname + File.separator + "add.js" ;
         }
         if (template.contains("edit.js.vm")) {
             return "src" + File.separator + "main" + File.separator + "resources" + File.separator
                     + "static" + File.separator + "js" + File.separator + "appjs" + File.separator
-                    + moduleName + File.separator + classname + File.separator + "edit.js";
+                    + moduleName + File.separator + classname + File.separator + "edit.js" ;
         }
-
-        //		if(template.contains("menu.sql.vm")){
-        //			return className.toLowerCase() + "_menu.sql";
-        //		}
-
         throw new RuntimeException("异常！无法识别的模板！");
     }
 }

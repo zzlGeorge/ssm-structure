@@ -1,0 +1,66 @@
+package ${package}.controller;
+
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.lang.Assert;
+import com.alibaba.fastjson.JSON;
+import ${package}.dao.entity.${className};
+import ${package}.controller.api.${className}Api;
+import ${package}.service.I${className}Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * ${comments}服务控制器
+ *
+ * @author ${author}
+ * @description ${comments}
+ * @since ${datetime}
+ */
+@Api(tags = "${comments}")
+@Slf4j
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/${pathName}/${classname}")
+public class ${className}Controller {
+
+    @Autowired
+    private final I${className}Service ${classname}Service;
+
+    @ApiOperation("根据id查询${comments}")
+    @GetMapping("/{${pk.attrname}}")
+    public ${className}Api.SimpleResponse get${className}(@PathVariable("${pk.attrname}") Long ${pk.attrname}) {
+        ${className} entity = ${classname}Service.getById(${pk.attrname});
+        ${className}Api.SimpleResponse response = new ${className}Api.SimpleResponse();
+        BeanUtil.copyProperties(entity, response);
+        return response;
+    }
+
+    @ApiOperation("新增${comments}")
+    @PostMapping
+    public ${pk.attrType} post${className}(@RequestBody ${className}Api.AddRequest addRequest) {
+        ${className} entity = new ${className}();
+        BeanUtil.copyProperties(addRequest, entity);
+        ${classname}Service.save(entity);
+        return entity.get${pk.attrName}();
+    }
+
+    @ApiOperation("编辑${comments}")
+    @PutMapping
+    public boolean put${className}(@RequestBody ${className}Api.EditRequest editRequest) {
+        ${pk.attrType}  ${pk.attrname} = editRequest.get${pk.attrName}();
+        Assert.notNull(${pk.attrname}, "${pk.attrname}不能为空");
+        ${className} entity = ${classname}Service.getById(${pk.attrname});
+        BeanUtil.copyProperties(editRequest, entity);
+        return ${classname}Service.updateById(entity);
+    }
+
+    @ApiOperation("删除${comments}")
+    @PutMapping("/{${pk.attrname}}")
+    public boolean del${className}(@PathVariable("${pk.attrname}") Long ${pk.attrname}) {
+        return ${classname}Service.removeById(${pk.attrname});
+    }
+}

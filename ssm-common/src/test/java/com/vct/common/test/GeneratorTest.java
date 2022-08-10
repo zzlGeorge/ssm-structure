@@ -26,16 +26,24 @@ public class GeneratorTest {
         GeneratorMapper generatorMapper = sqlSession.getMapper(GeneratorMapper.class);
 
 
-        List<String> tables = Arrays.asList("g_goods"); // 必填，需要你想生成的表信息
-        List<String> templates = Arrays.asList(GenUtils.TemplateType.DOMAIN_JAVA, GenUtils.TemplateType.DAO_JAVA, GenUtils.TemplateType.MAPPER_XML); // 非必填，默认生成全模板
-        String packageName = "com.vct.goods"; // 非必填，具体包名，默认为配置中的包名
-        String contextPath = "E:\\program\\ssm-structure\\ssm-goods-root\\goods-service"; // 非必填，生成文件上下文路径，默认为当前类文件上下文路径
+        List<String> tables = Arrays.asList("info_engine_label_alert_msg"); // 必填，需要你想生成的表信息
+//        List<String> templates = Arrays.asList(GenUtils.TemplateType.DOMAIN_JAVA, GenUtils.TemplateType.DAO_JAVA, GenUtils.TemplateType.MAPPER_XML); // 非必填，默认生成全模板
+        List<String> templates = Arrays.asList(
+                "templates/dataqin/Controller.java.vm",
+                "templates/dataqin/Api.java.vm",
+                "templates/dataqin/entity.java.vm",
+                "templates/dataqin/Mapper.java.vm",
+                "templates/dataqin/Service.java.vm",
+                "templates/dataqin/ServiceImpl.java.vm"
+        ); // 非必填，默认生成全模板
+        String packageName = "com.dataqin.rule"; // 非必填，具体包名，默认为配置中的包名
+        String contextPath = "D:\\download"; // 非必填，生成文件上下文路径，默认为当前类文件上下文路径
         // 在项目中生成模板文件
-        genSourceToProject(generatorMapper, tables, templates, packageName, contextPath);
+//        genSourceToProject(generatorMapper, tables, templates, packageName, contextPath);
 
         // 将生成的文件放入zip文件中输出
-//        String outputPath = "C:\\Users\\lszhangzhangl\\Desktop\\demo.zip";
-//        genZip(generatorMapper, tables, packageName, outputPath);
+        String outputPath = "D:\\download\\demo.zip";
+        genZip(generatorMapper, tables, templates, packageName, outputPath);
     }
 
     static void genSourceToProject(GeneratorMapper generatorMapper, List<String> tables,
@@ -52,18 +60,18 @@ public class GeneratorTest {
         }
     }
 
-    static void genZip(GeneratorMapper generatorMapper, List<String> tables,
+    static void genZip(GeneratorMapper generatorMapper, List<String> tables, List<String> templates,
                        String packageName, String outputPath) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zipOs = new ZipOutputStream(outputStream);
-        List<String> tableNames = new ArrayList<String>(tables);
+        List<String> tableNames = new ArrayList<>(tables);
         for (String tableName : tableNames) {
             //查询表信息
             Map<String, String> table = generatorMapper.get(tableName);
             //查询列信息
             List<Map<String, String>> columns = generatorMapper.listColumns(tableName);
             //生成代码
-            GenUtils.generatorCodeToZip(table, columns, zipOs, packageName);
+            GenUtils.generatorCodeToZip(templates, table, columns, zipOs, packageName);
         }
         IOUtils.closeQuietly(zipOs);
 
